@@ -2,15 +2,12 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 const qs = require('querystring');
-const formidable = require('formidable');
-const cats = require('../data/cats.json');
 const breeds = require('../data/breeds.json');
 
 module.exports = (req, res) => {
     const pathname = url.parse(req.url).pathname;
 
-    //BREED
-    if (pathname === '/cats/addBreed' && req.method === 'GET') {
+    if (pathname === '/cats/addBreed' && req.method === 'GET') { //BREEDS
         const filePath = path.normalize(
             path.join(__dirname, `../views/cats/addBreed.html`));
 
@@ -51,6 +48,7 @@ module.exports = (req, res) => {
                     res.end();
                     return
                 }
+
                 const tmp = JSON.parse(data);
                 tmp.push(post.breed);
 
@@ -59,10 +57,7 @@ module.exports = (req, res) => {
                 return res.end();
             });
         });
-    }
-
-    //CATS
-    if (pathname === '/cats/addCat' && req.method === 'GET') {
+    } else if (pathname === '/cats/addCat' && req.method === 'GET') { //CATS
         const filePath = path.normalize(
             path.join(__dirname, `../views/cats/addCat.html`));
 
@@ -77,12 +72,11 @@ module.exports = (req, res) => {
 
             res.writeHead(200, { 'Content-Type': 'text/html' });
 
-            console.log(breeds);
             const breedOptions = breeds.map(breed => {
                 return `<option value="${breed}">${breed}</option>`
             });
 
-            console.log(breedOptions);
+
             const modifiedData = data.toString()
                 .replace('{{catBreeds}}', breedOptions);
 
@@ -114,9 +108,9 @@ module.exports = (req, res) => {
                     return
                 }
                 const tmp = JSON.parse(data);
-                console.log(post);
                 tmp.push(
                     {
+                        id: tmp.length,
                         name: post.name,
                         description: post.description,
                         upload: post.upload,
@@ -129,6 +123,7 @@ module.exports = (req, res) => {
                 return res.end();
             });
         });
+    } else {
+        return true
     }
-
 }
