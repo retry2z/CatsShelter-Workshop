@@ -1,6 +1,5 @@
 const url = require('url');
 const fs = require('fs');
-const qs = require('querystring');
 const path = require('path');
 const cats = require('../data/cats.json');
 const breeds = require('../data/breeds.json');
