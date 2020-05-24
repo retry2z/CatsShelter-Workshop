@@ -71,14 +71,10 @@ module.exports = (req, res) => {
                         res.end();
                         return
                     }
-                    let tmp = Array.from(JSON.parse(data));
-
-                    let filtered = tmp.filter(x => (x.name).toLocaleLowerCase() === post.search.toLocaleLowerCase());
-                    if (!filtered.length) {
-                        filtered = tmp.filter(x => (x.breed).toLocaleLowerCase() === post.search.toLocaleLowerCase());
-                    }
-
-                    console.log(filtered);
+                    const tmp = Array.from(JSON.parse(data));
+                    const filteredByName = tmp.filter(x => (x.name).toLocaleLowerCase() === post.search.toLocaleLowerCase());
+                    const filteredByBreed = tmp.filter(x => (x.breed).toLocaleLowerCase() === post.search.toLocaleLowerCase());
+                    const filtered = filteredByName.concat(filteredByBreed);
 
                     load(req, res, filtered);
                 });
