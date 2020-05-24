@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <title>Cat Shelter</title>
 </head>
+
 <body>
     <header>
         <nav>
@@ -19,26 +21,25 @@
         </nav>
         <h1>Cat Shelter</h1>
     </header>
-        <form action="/cats/addCat" method="POST" class="cat-form">
-            <h2>Add Cat</h2>
+    <form action="/cats/addCat" method="POST" class="cat-form">
+        <h2>Add Cat</h2>
 
-            <label for="name">Name</label>
-            <input name="name" type="text" id="name">
+        <label for="name">Name</label>
+        <input name="name" type="text" id="name">
 
-            <label for="description">Description</label>
-            <textarea name="description" id="description"></textarea>
+        <label for="description">Description</label>
+        <textarea name="description" id="description"></textarea>
 
-            <label for="image">Image</label>
-            <input name="upload" type="file" id="image">
+        <label for="image">Image</label>
+        <input name="upload" type="text" id="image">
 
-            <label for="group">Breed</label>
-            <select name="breed" id="group">
-                <option value="Fluffy Cat">Fluffy Cat</option>
-				<option value="Fluffy Cat">Fluffy Cat</option>
-				<option value="Fluffy Cat">Fluffy Cat</option>
-            </select>
-            
-            <button>Add Cat</button>
-        </form>
+        <label for="group">Breed</label>
+        <select name="breed" id="group">
+            {{catBreeds}}
+        </select>
+
+        <button>Add Cat</button>
+    </form>
 </body>
+
 </html>
