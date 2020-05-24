@@ -10,7 +10,7 @@ module.exports = (req, res) => {
         const template =
             `<li><img src="${cat.upload}"><h3>${cat.name}</h3><p><span>Breed: </span>${cat.breed}</p><p><span>Description: </span>${cat.description}</p>
             <ul class="buttons"><li class="btn edit"><a href="/cats/details/${cat.id}">Details</a></li>
-            <li class="btn delete"><a href="/cats/delete/${cat.id}">New Home</a></li></ul></li>`;
+            <li class="btn delete"><a href="/cats/remove/${cat.id}">New Home</a></li></ul></li>`;
         return template
     };
 
