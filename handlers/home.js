@@ -1,8 +1,6 @@
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
-const cats = require('../data/cats.json');
-const breeds = require('../data/breeds.json');
 
 module.exports = (req, res) => {
     const pathname = url.parse(req.url).pathname;
@@ -22,7 +20,7 @@ module.exports = (req, res) => {
 
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.write(data);
-            res.end('ok');
+            res.end();
         });
 
     } else {

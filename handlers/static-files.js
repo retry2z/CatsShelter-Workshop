@@ -1,6 +1,5 @@
 const url = require('url');
 const fs = require('fs');
-const path = require('path');
 
 function getContentType(url) {
     if (url.endsWith('css')) {
@@ -32,7 +31,7 @@ module.exports = (req, res) => {
             const type = getContentType(pathname);
             res.writeHead(200, { 'Content-Type': type });
             res.write(data);
-            res.end('ok');
+            res.end();
         });
 
     } else {
