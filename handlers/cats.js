@@ -33,8 +33,6 @@ module.exports = (req, res) => {
     if (pathname === '/cats/addBreed' && req.method === 'GET') {
         getHandler(res, req, 'addBreed');
     } else if (pathname === '/cats/addBreed' && req.method === 'POST') {
-
-
         let body = '';
         req.on('data', function (data) {
             body += data;
@@ -60,7 +58,6 @@ module.exports = (req, res) => {
                 const breeds = JSON.parse(data);
                 breeds.push(post.breed);
 
-                console.log(breeds);
                 fs.writeFileSync(filePath, JSON.stringify(breeds));
             });
         });
@@ -69,7 +66,42 @@ module.exports = (req, res) => {
     //CATS
     if (pathname === '/cats/addCat' && req.method === 'GET') {
         getHandler(res, req, 'addCat');
-    } else if (pathname === '/cats/addBreed' && req.method === 'POST') {
-        //
+    } else if (pathname === '/cats/addCat' && req.method === 'POST') {
+        let body = '';
+        req.on('data', function (data) {
+            body += data;
+
+            if (body.length > 1e6)
+                req.connection.destroy();
+        });
+
+        req.on('end', function () {
+            const post = qs.parse(body);
+            const filePath = path.normalize(
+                path.join(__dirname, `../data/cats.json`));
+
+
+            fs.readFile(filePath, 'utf-8', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    res.writeHead(404, { 'Content-Type': 'text/plain' });
+                    res.write('File not found.');
+                    res.end();
+                    return
+                }
+                const tmp = JSON.parse(data);
+                console.log(post);
+                tmp.push(
+                    {
+                        name: post.name,
+                        description: post.description,
+                        upload: post.upload,
+                        breed: post.breed,
+                    }
+                );
+
+                fs.writeFileSync(filePath, JSON.stringify(tmp));
+            });
+        });
     }
 }
