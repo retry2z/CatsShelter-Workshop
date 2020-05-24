@@ -21,7 +21,7 @@
         </nav>
         <h1>Cat Shelter</h1>
     </header>
-    <form action="/cats/details" method="POST" class="cat-form">
+    <form action="/cats/details/{{catId}}" method="POST" class="cat-form">
         <h2>Edit Cat</h2>
         <label for="name">Name</label>
         <input type="text" id="name" name="name" value="{{catName}}">

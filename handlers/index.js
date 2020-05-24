@@ -1,7 +1,7 @@
 const homeHandler = require('./home');
 const staticFiles = require('./static-files');
 const cats = require('./cats');
-const actions = require('./actions');
+const edit = require('./edit');
 
 
-module.exports = [homeHandler, cats, actions, staticFiles];
+module.exports = [homeHandler, cats, edit, staticFiles];
