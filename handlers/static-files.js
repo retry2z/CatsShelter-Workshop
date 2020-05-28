@@ -4,14 +4,12 @@ const fs = require('fs');
 function getContentType(url) {
     if (url.endsWith('css')) {
         return 'text/css';
-    } else if (url.endsWith('html')) {
-        return 'text/css';
     } else if (url.endsWith('png')) {
         return 'image/png';
     } else if (url.endsWith('js')) {
         return 'file/js';
     } else {
-        return
+        return 'text/html';
     }
 }
 
@@ -24,14 +22,13 @@ module.exports = (req, res) => {
                 console.error(err);
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
                 res.write('File not found.');
-                res.end();
-                return
+                return res.end();
             }
 
             const type = getContentType(pathname);
             res.writeHead(200, { 'Content-Type': type });
             res.write(data);
-            res.end();
+            return res.end();
         });
     } else {
         return true
